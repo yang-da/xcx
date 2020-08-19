@@ -1,0 +1,99 @@
+form{
+  /* height: 155rpx;
+  line-height: 155rpx; */
+  padding-bottom: 50rpx;
+  background-color: #fff;
+}
+form .searchBox{
+  width:550rpx;
+  height:64rpx;
+  background:rgba(246,246,246,1);
+  border-radius:32rpx;
+  margin: 45rpx auto;
+}
+.search {
+  width: 70%;
+  margin: 0rpx auto;
+  /* margin: 45rpx 0; */
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #f6f6f6;
+  border-radius: 32rpx;
+  display: flex;
+  padding: 0rpx 32rpx;
+  position: relative;
+}
+
+.search icon {
+  margin-left: 23rpx;
+  margin-right:12rpx;
+  margin-top: 16rpx;
+}
+
+.search input {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  /* padding-right: 100rpx; */
+}
+
+.search .btn{
+  font-size:26rpx;
+  color: #333;
+  position: absolute;
+  right: 28rpx;
+  top: 2rpx;
+}
+
+.main{
+  padding: 30rpx;
+  background-color: #F6F6F6;
+}
+.main .delete{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28rpx;
+}
+.main .delete text{
+  font-size:26rpx;
+  color: #999;
+}
+.main .delete image{
+  width: 30rpx;
+  height: 32rpx;
+}
+.main .hot{
+  font-size:26rpx;
+  color: #999;
+  padding-top: 30rpx;
+  margin-bottom: 28rpx;
+}
+.historyList{
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #E4E4E4;
+}
+.historyList,.hotList{
+  display: flex;
+  flex-wrap: wrap;
+}
+.historyList text,.hotList text{
+  display: inline-block;
+  padding: 0 30rpx;
+  height:44rpx;
+  line-height: 44rpx;
+  background:#fff;
+  border-radius:22rpx;
+  font-size:26rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+}
+
+
+
+
+
+
+
+
+
+

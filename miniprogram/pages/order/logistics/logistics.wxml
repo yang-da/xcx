@@ -1,0 +1,50 @@
+<view class="container">
+	<view class="orderBox">
+		<view>
+			<image src="../../../images/tishi.png"></image>
+		</view>
+		<view class="order_r">
+			<view class="keywords">{{keywords}}</view>
+			<view class="">{{kd_type}}：{{orderId}}
+				<image src="../../../images/copy.png" bindtap="copyFun"></image>
+			</view>
+			<text>官方电话：95500</text>
+		</view>
+	</view>
+	<!-- 流程 -->
+	<view class="flow {{isFixed?'fixed':''}}">
+		<view>
+			<view class="flowLeft">
+				<view>06-13 <text>08:24</text></view>
+				<text class="circle"></text>
+			</view>
+			<view class="flowRight">
+				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
+				<text class="phone" bindtap="callPhone">{{phone}}</text>
+			</view>
+		</view>
+
+		<view>
+			<view class="flowLeft">
+				<view>06-13 <text>08:24</text></view>
+				<text class="circle"></text>
+			</view>
+			<view class="flowRight">
+				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
+			</view>
+		</view>
+
+		<view>
+			<view class="flowLeft">
+				<view>06-13 <text>08:24</text></view>
+				<text class="circle"></text>
+			</view>
+			<view class="flowRight">
+				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
+			</view>
+		</view>
+
+
+
+	</view>
+</view>

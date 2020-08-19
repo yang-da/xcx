@@ -1,0 +1,57 @@
+<view class="container">
+  <!-- <text class="line"></text> -->
+  <view class="show" wx:for="{{list}}" wx:key="index">
+    <view class="yuan"><image src="../../../images/yuan.png" mode="widthFix"></image></view>
+    <image src="../../../images/sanjiao_zuo.png" class="sanjiao"></image>
+    <view>
+      <view class="info">
+        <image src="http://ggb-service.ssup.cn/selfShop/img/zhenpinhui.png" mode="center"></image>
+        <view class="info_right">
+          <view>{{item.name}}</view>
+          <text>{{item.create_time}}</text>
+        </view>
+      </view>
+      <rich-text nodes="{{item.content}}"></rich-text>
+      <!-- <view>退款成功</view> -->
+    </view>
+  </view>
+  <!-- <view class="show">
+    <view class="yuan"><image src="../../../images/yuan.png" mode="widthFix"></image></view>
+    <image src="../../../images/sanjiao_zuo.png" class="sanjiao"></image>
+    <view>
+      <view class="info">
+        <image src="../../../images/xuanze.png" mode="widthFix"></image>
+        <view class="info_right">
+          <view>姓名</view>
+          <text>2019-12-5 12:32:41</text>
+        </view>
+      </view>
+      <view>卖家同意申请</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+    </view>
+  </view>
+  <view class="show">
+    <view class="yuan"><image src="../../../images/yuan.png" mode="widthFix"></image></view>
+    <image src="../../../images/sanjiao_zuo.png" class="sanjiao"></image>
+    <view>
+      <view class="info">
+        <image src="../../../images/xuanze.png" mode="widthFix"></image>
+        <view class="info_right">
+          <view>姓名</view>
+          <text>2019-12-5 12:32:41</text>
+        </view>
+      </view>
+      <view>卖家同意申请</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+      <view>退款成功</view>
+    </view>
+  </view> -->
+</view>
+

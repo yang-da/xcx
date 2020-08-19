@@ -1,0 +1,42 @@
+view{
+  box-sizing: border-box;
+}
+.search{
+  display: flex;
+  justify-content: center;
+  margin: 13rpx auto;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background-color: #fff;
+  width: 88%;
+  padding: 12rpx;
+}
+.search input{
+  font-size:26rpx;
+  width: 320rpx;
+}
+.van-icon{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 15rpx;
+  margin-top: 6rpx;
+}
+
+.types view{
+  width: 100%;
+  background-color: #fff;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 0 38rpx;
+  font-size:30rpx;
+  color: #333;
+}
+.types view:last-child{
+  border-bottom: 0;
+}
+
+
+
+
+

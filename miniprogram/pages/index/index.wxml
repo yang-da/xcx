@@ -1,0 +1,178 @@
+<!-- <view id="main"> -->
+<!-- 搜索 -->
+<form>
+	<navigator url="search">
+		<view class="search">
+			<image src="../../images/index/zhenpinhui.png"></image>
+			<icon class="icon-small" type="search" size="17"></icon>
+			<input confirm-type="search" placeholder="请输入您要搜索的商品"></input>
+		</view>
+	</navigator>
+</form>
+<!-- vant组件 -->
+<van-tabs animated swipeable bind:change="switchTab">
+	<van-tab title="精选">
+		<!-- 轮播图 -->
+		<swiper class="swiper" indicator-dots="true" duration="500" autoplay="true">
+			<swiper-item wx:for="{{bannerImg}}" wx:key="index">
+				<navigator url="../cart/cart?ad_link={{item.ad_link}}&title={{item.title}}">
+					<view class="swiper-item" data-id="{{item.id}}" data-classId="{{item.ad_link}}">
+						<image src="{{item.pic_url}}" mode="heightFix"></image>
+					</view>
+				</navigator>
+			</swiper-item>
+		</swiper>
+		<!-- 活动图标 -->
+		<swiper class="swiper1" indicator-dots="true" duration="500" display-multiple-items="4">
+			<swiper-item wx:for="{{imgs}}" wx:key="index">
+				<view class="swiper-item" data-id="{{item.id}}" data-classId="{{item.ad_link}}">
+					<image src="{{item.pic_url}}"></image>
+					<text>{{item.title}}</text>
+				</view>
+			</swiper-item>
+		</swiper>
+		<!-- 今日抢购 -->
+		<view>
+			<navigator url="../cart/cart"><text>去购物车</text></navigator>
+			<navigator url="detail"><text>去选规格</text></navigator>
+			<navigator url="../address/address"><text>去选地址</text></navigator>
+		</view>
+		<view class="today">
+			<view class="todatTit">
+				<text>今日抢购</text>
+				<text>更多 ></text>
+			</view>
+			<swiper class="swiper2" display-multiple-items="3" next-margin='40rpx'>
+				<swiper-item>
+					<image src="../../images/xuanze.png"></image>
+					<text>丸美眼霜女弹力丸美眼霜女弹力</text>
+					<view class="swiperPrice">
+						<text class="price_sale"><text>￥</text>30.5</text>
+						<text class="del">￥35.5</text>
+					</view>
+				</swiper-item>
+				<swiper-item>
+					<image src="../../images/xuanze.png"></image>
+					<text>丸美眼霜女弹力丸美眼霜女弹力</text>
+					<view class="swiperPrice">
+						<text class="price_sale"><text>￥</text>30.5</text>
+						<text class="del">￥35.5</text>
+					</view>
+				</swiper-item>
+				<swiper-item>
+					<image src="../../images/xuanze.png"></image>
+					<text>丸美眼霜女弹力丸美眼霜女弹力</text>
+					<view class="swiperPrice">
+						<text class="price_sale"><text>￥</text>30.5</text>
+						<text class="del">￥35.5</text>
+					</view>
+				</swiper-item>
+				<swiper-item>
+					<image src="../../images/xuanze.png"></image>
+					<text>丸美眼霜女弹力丸美眼霜女弹力</text>
+					<view class="swiperPrice">
+						<text class="price_sale"><text>￥</text>30.5</text>
+						<text class="del">￥35.5</text>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view>
+		<!-- 筛选 -->
+		<view class="screen">
+			<view class="tabs">
+				<view class="{{tabIndex=='0'?'active':''}}" data-index="0" data-screen="default" bindtap="tabClick">默认</view>
+				<view class="{{tabIndex=='1'?'active':''}} {{second?'second':''}}" data-index="1" data-screen="sales_sum" bindtap="tabClick">
+					销量
+					<block wx:if="{{tabIndex=='1'}}">
+						<image src="../../images/up_down.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/upup.png"></image>
+					</block>
+				</view>
+				<view class="{{tabIndex=='2'?'active':''}} {{second?'second':''}}" data-index="2" data-screen="price_market" bindtap="tabClick">
+					商品价格
+					<block wx:if="{{tabIndex=='2'}}">
+						<image src="../../images/up_down.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/upup.png"></image>
+					</block>
+				</view>
+				<view class="{{tabIndex=='3'?'active':''}}" data-index="3" data-screen="create_time" bindtap="tabClick">最新</view>
+			</view>
+			<view class="tabs"></view>
+			<!-- 列表 -->
+			<view class="lists">
+				<view class="list" wx:for="{{shopList}}" wx:key="index" data-id="{{item.goods_id}}">
+					<image src="{{item.pic_url}}"></image>
+					<text class="sales">累计销售：{{item.sales_sum}}单</text>
+					<view class="title">
+						<image src="../../images/index/zhenpinhui.png"></image>{{item.title}}
+					</view>
+					<text class="del">￥{{item.price_market}}</text>
+					<view class="price">
+						<text>券后￥{{item.price_member}}</text>
+						<text class="coupon" style="background: url(../../images/index/quan.png);background-size: 100% 100%;">50元券</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</van-tab>
+	<!-- wx:for="{{tabs}}" title="{{item.class_name}}" data-id="{{item.id}}" -->
+	<van-tab wx:for="{{tabs}}" title="{{item.class_name}}" name="{{item.id}}">
+		<swiper class="swiper3" duration="500" display-multiple-items="5">
+			<swiper-item wx:for="{{twoTabs}}" data-id="{{item.id}}" bindtap="getTwoShopList">
+				<view class="swiper-item">
+					<image src="{{item.pic_url}}"></image>
+					<text>{{item.class_name}}</text>
+				</view>
+			</swiper-item>
+		</swiper>
+		<!-- 筛选 -->
+		<view class="screen">
+			<view class="tabs">
+				<view class="{{tabIndex=='0'?'active':''}}" data-index="0" data-screen="default" bindtap="tabClick">默认</view>
+				<view class="{{tabIndex=='1'?'active':''}} {{second?'second':''}}" data-index="1" data-screen="sales_sum" bindtap="tabClick">
+					销量
+					<block wx:if="{{tabIndex=='1'}}">
+						<image src="../../images/up_down.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/upup.png"></image>
+					</block>
+				</view>
+				<view class="{{tabIndex=='2'?'active':''}} {{second?'second':''}}" data-index="2" data-screen="price_market" bindtap="tabClick">
+					商品价格
+					<block wx:if="{{tabIndex=='2'}}">
+						<image src="../../images/up_down.png"></image>
+					</block>
+					<block wx:else>
+						<image src="../../images/upup.png"></image>
+					</block>
+				</view>
+				<view class="{{tabIndex=='3'?'active':''}}" data-index="3" data-screen="create_time" bindtap="tabClick">最新</view>
+			</view>
+			<!-- 列表 -->
+			<block wx:if="{{none}}">
+				<view class="lists">
+					<view class="list" wx:for="{{twoShopList}}" wx:key="index" data-id="{{item.goods_id}}">
+						<image src="{{item.pic_url}}"></image>
+						<text class="sales">累计销售：{{item.sales_sum}}单</text>
+						<view class="title">
+							<image src="../../images/index/zhenpinhui.png"></image>{{item.title}}
+						</view>
+						<text class="del">￥{{item.price_market}}</text>
+						<view class="price">
+							<text>券后￥{{item.price_member}}</text>
+							<text class="coupon" style="background: url(../../images/index/quan.png);background-size: 100% 100%;">50元券</text>
+						</view>
+					</view>
+				</view>
+			</block>
+			<block wx:else><view style="text-align:center;margin-top: 20rpx">暂无数据</view></block>
+		</view>
+	</van-tab>
+</van-tabs>
+
+<!-- </view> -->

@@ -1,0 +1,120 @@
+/* pages/order/logistics/logistics.wxss */
+view,text{
+  box-sizing: border-box;
+}
+image{
+  vertical-align: middle;
+}
+.container{
+  padding: 20rpx;
+  width: 100%;
+}
+.orderBox{
+  width: 100%;
+  background-color: #fff;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  border-radius:10rpx;
+}
+.orderBox view image{
+  width: 130rpx;
+  height: 130rpx;
+  margin-right: 24rpx;
+}
+.order_r{
+  flex: 1;
+}
+.keywords{
+  font-size: 30rpx;
+  color: #FF653C;
+  font-weight: 500;
+}
+.order_r view:nth-child(2){
+  color: #666666;
+  font-size: 24rpx;
+  margin-top: 18rpx;
+}
+.order_r view image{
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 24rpx;
+  margin-bottom: 4rpx;
+}
+.order_r text{
+  color: #666666;
+  font-size: 24rpx;
+}
+
+/* 流程 */
+.flow{
+  width: 100%;
+  margin-top: 20rpx;
+  border-radius:10rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.flow>view{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 44rpx;
+}
+.flow>view:last-child{
+  margin-bottom: 10rpx;
+}
+.flow>view:last-child .circle::after{
+  height: 0;
+}
+.flowLeft {
+  width: 110rpx;
+  position: relative;
+  margin-right: 30rpx;
+}
+.flowLeft view{
+  font-size:26rpx;
+  color: #999;
+}
+.flow view:first-child .flowLeft view{
+  color: #333;
+}
+.flowLeft view text{
+  font-size:22rpx;
+  color: #999;
+  display: block;
+  padding-left: 14rpx;
+}
+.circle{
+  display: inline-block;
+  width:20rpx;
+  height:20rpx;
+  background:#e4e4e4;
+  border-radius:50%;
+  background-color: #e4e4e4;
+  position: absolute;
+  right: -10rpx;
+  top: 10rpx;
+}
+.circle::after{
+  content: '';
+  position: absolute;
+  display: inline-block;
+  height: 120rpx;
+  border-left: 2rpx dashed #E4E4E4;
+  right: 10rpx;
+}
+.flowRight{
+  flex: 1;
+}
+.flowRight text{
+  color: #333;
+  font-size: 24rpx;
+}
+.flowRight .phone{
+  color: #FF653C;
+}
+
+
+.fixed{
+  position: fixed;
+  top: 0;
+}

@@ -1,0 +1,136 @@
+<view class="container">
+	<!-- 步骤 -->
+	<view wx:if="{{data.type==2}}" class="steps type2">
+		<view class="{{active!=-1?'active':''}}" data-index="0">
+			<image wx:if="{{active!=-1}}" src="../../../images/jindu_liang.png"></image>
+			<image wx:else src="../../../images/jindu_hui.png"></image>
+			提交申请
+			<image wx:if="{{active<2}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+		<view class="{{active>=2?'active':''}}" data-index="1">
+			<image wx:if="{{active>=2}}" src="../../../images/jindu_liang.png"></image>
+			<image wx:else src="../../../images/jindu_hui.png"></image>
+			商家审核
+			<image wx:if="{{active>=2&&active!=5}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+		<view class="{{active==5?'active':''}}" data-index="2">
+			<image wx:if="{{active==5}}" src="../../../images/tuikuan_liang.png"></image>
+			<image wx:else src="../../../images/tuikuan_hui.png"></image>
+			退款成功
+			<image wx:if="{{active==5}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+	</view>
+	<!-------------------------------->
+	<view wx:if="{{data.type==1}}" class="steps type1">
+		<view class="{{active!=-1?'active':''}}" data-index="0">
+			<image wx:if="{{active!=-1}}" src="../../../images/jindu_liang.png"></image>
+			<image wx:else src="../../../images/jindu_hui.png"></image>
+			提交申请
+			<image wx:if="{{active<2}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+		<view class="{{active>=2?'active':''}}" data-index="1">
+			<image wx:if="{{active>=2}}" src="../../../images/jindu_liang.png"></image>
+			<image wx:else src="../../../images/jindu_hui.png"></image>
+			商家审核
+			<image wx:if="{{active>=2&&active<4}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+		<view class="{{active>=4?'active':''}}" data-index="2">
+			<image wx:if="{{active>=4}}" src="../../../images/jindu_liang.png"></image>
+			<image wx:else src="../../../images/jindu_hui.png"></image>
+			寄回商品
+			<image wx:if="{{active==4}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+		<view class="{{active==5?'active':''}}" data-index="3">
+			<image wx:if="{{active==5}}" src="../../../images/tuikuan_liang.png"></image>
+			<image wx:else src="../../../images/tuikuan_hui.png"></image>
+			退款成功
+			<image wx:if="{{active==5}}" src="../../../images/sanjiao.png" class="sanjiao"></image>
+		</view>
+	</view>
+	<!-- 进度说明 -->
+	<view class="stepShow">
+		<block wx:if="{{active==1}}">
+			<view class="stepShow1">商家拒绝</view>
+			<view class="stepShow2">您发起的退款申请已被商家拒绝，请进行<button>人工介入</button></view>
+			<view class="stepShowIn">
+				<view><text></text>原因：您的货物已发货，无法退款</view>
+			</view>
+		</block>
+		<block wx:if="{{active<2&&active!=1}}">
+			<view class="stepShow1">待商家审核</view>
+			<view class="stepShow2">您已成功发起退款申请，请耐心等待商家处理</view>
+			<view class="stepShowIn">
+				<view><text></text>提示：商家会在1小时内完成审核，逾期将自动通过</view>
+			</view>
+		</block>
+		<block wx:if="{{active>=2&&active<4}}">
+			<view class="stepShow1">等待寄回商品</view>
+			<view class="stepShow2">请按以下信息寄回商品(请勿货到付款)</view>
+			<view class="stepShowIn">
+				<view><text></text>收件人：{{address.name}}</view>
+				<view><text></text>联系电话：{{address.mobile}}</view>
+				<view><text></text>退货地址：{{address.address}}</view>
+			</view>
+			<view wx:if="{{active>=3}}" class="change" bindtap="jumpChange" data-status="{{active}}">修改退货物流单号</view>
+			<view wx:if="{{active<3}}" class="change" bindtap="jumpChange" data-status="{{active}}">填写退货物流单号</view>
+		</block>
+		<block wx:if="{{active==4}}">
+			<view class="stepShow1">商家审核通过</view>
+			<view class="stepShow2">商家已同意您的退款申请，退款处理中</view>
+			<view class="stepShowIn">
+				<view><text></text>请您耐心等待退款情况，如有其他问题请联系<button open-type="contact" bindcontact="handleContact">客服咨询</button></view>
+			</view>
+		</block>
+		<block wx:if="{{active==5}}">
+			<view class="stepShow1">已办理退款</view>
+			<view class="stepShow2">退款时间:{{data.refund_time}}</view>
+			<view class="stepShowIn">
+				<view><text></text>退款￥{{data.price}}将退回到您的账户中，请及时关注到账情况</view>
+				<view><text></text>若您的退款未到账，请及时联系<button open-type="contact" bindcontact="handleContact">客服咨询</button></view>
+			</view>
+		</block>
+	</view>
+	<!-- 退款金额 -->
+	<view class="price">
+		退款金额 <text>￥{{data.price}}</text>
+	</view>
+	<!-- 订单明细 -->
+	<view class="ddmx">
+		<view><text>售后类型</text>
+			<block wx:if="{{data.type==1}}">退货退款</block>
+			<block wx:if="{{data.type==2}}">仅退款</block>
+		</view>
+		<view><text>货物状态</text>
+			<block wx:if="{{data.is_receive==1}}">收到货</block>
+			<block wx:if="{{data.is_receive==0}}">未收到货</block>
+		</view>
+		<view><text>售后原因</text>{{data.tuihuo_case}}</view>
+		<view><text>售后数量</text>{{data.number}}件</view>
+		<view><text>详细说明</text>{{data.explain}}</view>
+	</view>
+	<!-- 协商记录 -->
+	<view class="record" bindtap="jumpRecord">
+		协商记录
+		<van-icon name="arrow" color="#666666" />
+	</view>
+	<!-- 商品信息 -->
+	<view class="shop">
+		<view class="list">
+			<view class="list_main">
+				<image src="{{data.pic_url}}"></image>
+				<view class="text">
+					<view class="title">{{data.title}}</view>
+					<block wx:for="{{data.attr}}" wx:key="index">
+						<text>{{item.name}}:{{item.item}}</text>
+					</block>
+					<view>￥{{data.price}}<text>x{{data.number}}</text></view>
+				</view>
+			</view>
+			<view class="orderId">
+				订单号：{{orderId}} <text bindtap="copyFun">复制</text>
+			</view>
+			<view class="time">下单时间：{{data.create_time}}</view>
+		</view>
+	</view>
+
+</view>

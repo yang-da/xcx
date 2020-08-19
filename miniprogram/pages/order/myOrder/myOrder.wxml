@@ -1,0 +1,218 @@
+<!--pages/order/myOrder.wxml-->
+<view class="container">
+	<scroll-view scroll-x="true" class="uls scroll-view_H">
+		<view catchtap="chooseStatusFun" class="{{liIndex == '0'?'active':''}}" data-index='0'>
+			<image src="../../../images/quanbudingdan.png"></image>
+			<text>全部订单</text>
+		</view>
+		<view catchtap="chooseStatusFun" class="{{liIndex == '1'?'active':''}}" data-index='1'>
+			<image src="../../../images/daifukuan.png"></image>
+			<text>待支付</text>
+		</view>
+		<view catchtap="chooseStatusFun" class="{{liIndex == '2'?'active':''}}" data-index='2'>
+			<image src="../../../images/daifahuo.png"></image>
+			<text>待发货</text>
+		</view>
+		<view catchtap="chooseStatusFun" class="{{liIndex == '3'?'active':''}}" data-index='3'>
+			<image src="../../../images/daishouhuo.png"></image>
+			<text>待收货</text>
+		</view>
+		<view catchtap="chooseStatusFun" class="{{liIndex == '4'?'active':''}}" data-index='4'>
+			<image src="../../../images/daipingjia.png"></image>
+			<text>待评价</text>
+		</view>
+		<view>
+			<navigator url="../sale/sale">
+				<image src="../../../images/shouhou.png"></image>
+				<text>售后订单</text>
+			</navigator>
+		</view>
+	</scroll-view>
+	<!-- 订单列表 -->
+	<view wx:if="{{liIndex!=4}}" class="orderList">
+		<view class="order" wx:for="{{dataList}}" wx:key="index" data-id="{{item.id}}" catchtap="jumpDetail">
+			<view class="orderTop">
+				<view>
+					<image src="http://center.ssup.cn/Uploads/goods/2020-07-22/5f17a6b80a085.png"></image>珍品会
+				</view>
+				<text wx:if="{{item.order_status==-1}}" style="{{item.order_status==-1?'color:#a2a2a2':''}}">已取消</text>
+				<text wx:if="{{item.order_status==0}}">待付款</text>
+				<text wx:if="{{item.order_status==1}}">待发货</text>
+				<text wx:if="{{item.order_status==2}}">待发货</text>
+				<text wx:if="{{item.order_status==3}}">待收货</text>
+				<text wx:if="{{item.order_status==4}}">待评价</text>
+				<text wx:if="{{item.order_status==4 && item.comment_status==1}}">已评价</text>
+			</view>
+			<view class="orderDetail">
+				<view wx:for="{{item.goods}}" wx:key="index">
+					<image src="{{item.selfImg}}"></image>
+					<view class="orderText">
+						<text class="title">{{item.title}}</text>
+						<view class="norms">
+							<text wx:for="{{item.selfAttr}}" wx:key="index">{{item.name}}：{{item.item}}</text>
+						</view>
+						<text class="price">￥{{item.price_member}}</text> <text class="num">x{{item.goods_num}}</text>
+					</view>
+				</view>
+
+				<view class="news">共{{item.count}}件 合计：￥{{item.price_sum}}(含运费￥{{item.shipping_monery}})</view>
+				<view class="doSome">
+					<!-- <text>{{item.order_status}}</text> -->
+					<!-- 已取消 -->
+					<block wx:if="{{item.order_status==-1}}">
+						<van-button catchtap="deleteFun" data-id="{{item.id}}">删除订单</van-button>
+						<van-button catchtap="buyAgain" data-index="{{index}}">再次购买</van-button>
+					</block>
+					<!-- 待付款 -->
+					<block wx:if="{{item.order_status==0}}">
+						<van-button catchtap="cancelFun" data-id="{{item.id}}">取消订单</van-button>
+						<van-button catchtap="showPopup" class="btn">去付款</van-button>
+					</block>
+					<!-- 待发货 -->
+					<block wx:if="{{item.order_status==1}}">
+						<van-button catchtap="buyAgain" data-index="{{index}}">再次购买</van-button>
+					</block>
+					<block wx:if="{{item.order_status==2}}">
+						<van-button catchtap="buyAgain" data-index="{{index}}">再次购买</van-button>
+					</block>
+					<!-- 待收货 -->
+					<block wx:if="{{item.order_status==3}}">
+						<van-button catchtap="buyAgain" data-index="{{index}}">再次购买</van-button>
+						<navigator url="../logistics/logistics">
+							<van-button>查看物流</van-button>
+						</navigator>
+						<van-button catchtap="confirm" class="btn" data-id="{{item.id}}">确认收货</van-button>
+					</block>
+					<!-- 待评价 -->
+					<block wx:if="{{item.order_status==4 && item.comment_status==0}}">
+						<navigator url="../logistics/logistics">
+							<van-button>查看物流</van-button>
+						</navigator>
+						<navigator url="../../ware/comment/comment?order_id={{item.id}}">
+							<van-button class="btn">评价晒单</van-button>
+						</navigator>
+					</block>
+					<!-- 已评价 -->
+					<block wx:if="{{item.order_status==4 && item.comment_status==1}}">
+						<navigator url="../logistics/logistics">
+							<van-button>查看物流</van-button>
+						</navigator>
+						<navigator url="">
+							<van-button class="btn">追加评价</van-button>
+						</navigator>
+					</block>
+
+					<!-- <van-button bind:click="goLogistics">查看物流</van-button>
+					<van-button bind:click="showPopup2">取消订单</van-button>
+					<van-button bind:click="showPopup3">删除订单</van-button>
+					<van-button bind:click="showPopup">去付款</van-button> -->
+				</view>
+			</view>
+		</view>
+		<view class="load">{{loadText}}</view>
+	</view>
+	<!-- 待评价列表 -->
+	<view wx:if="{{liIndex==4}}" class="orderList assessList">
+		<view class="order" wx:for="{{assessList}}" wx:key="index" data-id="{{item.id}}" catchtap="jumpDetail">
+			<view class="orderTop">
+				<view>
+					<image src="../../../images/daipingjia.png"></image>珍品会
+				</view>
+				<text>待评价</text>
+			</view>
+			<view class="orderDetail">
+				<view wx:for="{{item.goods}}" wx:key="index">
+					<image src="{{item.selfImg}}"></image>
+					<view class="orderText">
+						<text class="title">{{item.title}}</text>
+						<view class="norms">
+							<text wx:for="{{item.selfAttr}}" wx:key="index">{{item.name}}：{{item.item}}</text>
+						</view>
+						<text class="price">￥{{item.price_member}}</text> <text class="num">x{{item.goods_num}}</text>
+					</view>
+				</view>
+
+				<view class="news">共{{item.count}}件 合计：￥{{item.price_sum}}(含运费￥{{item.shipping_monery}})</view>
+				<view class="doSome">
+					<navigator url="../logistics/logistics">
+						<van-button>查看物流</van-button>
+					</navigator>
+					<navigator url="../../ware/comment/comment?order_id={{item.id}}">
+						<van-button class="btn">评价晒单</van-button>
+					</navigator>
+
+					<!-- <van-button bind:click="goLogistics">查看物流</van-button>
+					<van-button bind:click="showPopup2">取消订单</van-button>
+					<van-button bind:click="showPopup3">删除订单</van-button>
+					<van-button bind:click="showPopup">去付款</van-button> -->
+				</view>
+			</view>
+		</view>
+		<view class="load">{{loadText2}}</view>
+	</view>
+
+	<!-- 下拉弹框 -->
+	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+		<view class="popupTitle">确认付款</view>
+		<view class="choosePay" catchtap="choosePay">
+			<view>
+				<image src="../../../images/xianjinquan.png"></image>积分
+			</view>
+			<view>
+				<image wx:if="{{isUse}}" src="../../../images/weixuanze.png"></image>
+				<image wx:else="{{isUse}}" src="../../../images/xuanze.png"></image>
+			</view>
+		</view>
+		<view class="goPay">现金支付￥{{money}}</view>
+	</van-popup>
+	<!-- 弹出框 -->
+	<!-- 确定收货 -->
+	<view class="gray" wx:if="{{qdss}}" catchtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{qdss}}" catchtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" catchtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/tishi.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认收货订单？</text>
+		<view class="yesNo">
+			<text class="no" catchtap="closeGray">再想想</text>
+			<text class="yes" catchtap="onYes">确认</text>
+		</view>
+	</view>
+	<!-- 取消订单 -->
+	<view class="gray" wx:if="{{qxdd}}" catchtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{qxdd}}" catchtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" catchtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/tishi.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认取消订单？</text>
+		<view class="yesNo">
+			<text class="no" catchtap="closeGray">再想想</text>
+			<text class="yes" catchtap="onYes">确认</text>
+		</view>
+	</view>
+	<!-- 删除订单 -->
+	<view class="gray2" wx:if="{{scdd}}" catchtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{scdd}}" catchtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" catchtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/gantanhao.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认删除订单？</text>
+		<view class="yesNo">
+			<text class="no" catchtap="closeGray">取消</text>
+			<text class="yes" catchtap="onYes">确认</text>
+		</view>
+	</view>
+
+</view>

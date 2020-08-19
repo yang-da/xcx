@@ -1,0 +1,10 @@
+<view class="search">
+  <van-icon name="search" />
+  <input type="text" placeholder="请输入您要搜索的物流公司"></input>
+</view>
+<view class="types">
+  <view>顺丰快递</view>
+  <view>圆通快递</view>
+  <view>韵达快递</view>
+  <view>中通快递</view>
+</view>

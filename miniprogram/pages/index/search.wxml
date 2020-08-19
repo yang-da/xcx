@@ -1,0 +1,28 @@
+<form>
+	<view class="search">
+		<icon class="icon-small" type="search" size="17"></icon>
+		<input confirm-type="search" placeholder="请输入您要搜索的商品" bindblur="getValue"></input>
+		<text class="btn" bindtap="searchFun">搜索</text>
+	</view>
+</form>
+<!-- <van-search value="{{ value }}" placeholder="请输入搜索关键词" /> -->
+
+<view class="main">
+	<block wx:if="{{hasList}}">
+		<view class="delete">
+			<text>搜索历史</text>
+			<image src="../../images/index/shanchu.png" bindtap="delete"></image>
+		</view>
+		<view class="historyList">
+			<text wx:for="{{historyList}}">{{item}}</text>
+		</view>
+	</block>
+
+	<view class="hot">热门搜索</view>
+	<view class="hotList">
+		<text wx:for="{{hotList}}" data-item="{{item}}" bindtap="searchHot">{{item}}</text>
+	</view>
+</view>
+
+
+<van-circle value="{{ percent }}" text="{{percent}}" speed="8000" />

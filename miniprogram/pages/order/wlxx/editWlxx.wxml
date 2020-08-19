@@ -1,0 +1,36 @@
+<view class="container">
+	<view class="info">
+		<view class="h1">当前退货商品的收件人信息</view>
+		<view>{{address.name}}<text>{{address.mobile}}</text></view>
+		<view class="addtress">{{address.address}}</view>
+	</view>
+
+	<view class="wlInfo">
+		<view class="h1">退货物流信息</view>
+		<view class="num">
+			<label>物流单号</label>
+			<input placeholder="请填写退货的物流单号" type="number" disabled="{{editStatus!=true}}" value="{{waybill_number}}" bindblur="bindblur"></input>
+		</view>
+		<view class="company">
+			<label>物流公司</label>
+			<input wx:if="{{editStatus!=true}}" placeholder="请选择物流公司" disabled="true" value="{{express}}"></input>
+			<block wx:else>
+				<picker mode="selector" range="{{arr}}" bindchange="bindchange">
+					<view class="picker">
+						{{arr[index]}}
+					</view>
+				</picker>
+				<van-icon name="arrow" color="#666666" />
+			</block>
+		</view>
+		<view wx:if="{{editStatus!=true}}" class="edit" bindtap="jumpEdit">
+			<image src="../../../images/bianji.png"></image>
+			编辑
+		</view>
+	</view>
+	<block wx:if="{{editStatus}}">
+		<view class="p">请正确填写物流信息，以免影响您的退货进度</view>
+		<button class="submit {{input?'active':''}}" bindtap="submitFun">确认提交</button>
+	</block>
+
+</view>

@@ -1,0 +1,224 @@
+<view class="container">
+	<view class="head">
+		<!-- <image src="../../../images/head.png" class="headImg"></image> -->
+		<view class="status">
+			<view wx:if="{{data.order_status==0}}">
+				<image src="../../../images/time.png"></image>待付款
+				<text>{{returnStr}}</text>
+			</view>
+			<view wx:if="{{data.order_status==-1}}">
+				<image src="../../../images/yiquxiao.png"></image>已取消
+				<text>取消原因：超时未支付</text>
+			</view>
+			<view wx:if="{{data.order_status==1}}">
+				<image src="../../../images/dfh.png"></image>待发货
+				<text>卖家正在紧锣密鼓的给您打包呢</text>
+			</view>
+			<view wx:if="{{data.order_status==2}}">
+				<image src="../../../images/dfh.png"></image>待发货
+				<text>卖家正在紧锣密鼓的给您打包呢</text>
+			</view>
+			<view wx:if="{{data.order_status==3}}">
+				<image src="../../../images/dsh.png"></image>待收货
+			</view>
+			<view wx:if="{{data.order_status==4}}">
+				<image src="../../../images/jywc.png"></image>交易完成
+				<text>您的订单已完成，可以去晒单啦</text>
+			</view>
+		</view>
+		<!-- 取消原因 -->
+		<view wx:if="{{data.order_status==-1}}" class="qxyy">取消原因：买家主动取消</view>
+	</view>
+	<!-- 地址 -->
+	<view class="address">
+		<view class="name">{{data.address_id.realname}}<text>{{data.address_id.mobile}}</text></view>
+		<view class="addressP">{{data.address_id.prov}}{{data.address_id.city}}{{data.address_id.dist}}{{data.address_id.address}}</view>
+		<navigator url="../../mine/address/modify/modify">
+			<view class="edit">
+				<image src="../../../images/bianji.png"></image>编辑
+			</view>
+		</navigator>
+	</view>
+	<!-- 商品 -->
+	<!-- <van-sticky z-index='1'> -->
+	<view class="shopLists">
+		<view class="shopLists_top">
+			<image src="../../../images/tishi.png"></image>珍品会
+		</view>
+		<view class="list" wx:for="{{data.child}}" wx:key="index">
+			<view class="list_main">
+				<image src="{{item.img}}"></image>
+				<view class="text">
+					<view class="title">{{item.goods_title}}</view>
+					<block wx:for="{{data.child.attribute}}">
+						<text>{{item.name}}</text>
+						<text>{{item.item}}</text>
+					</block>
+					<view>￥{{item.goods_price}}<text>x{{item.goods_num}}</text></view>
+				</view>
+			</view>
+			<block wx:if="{{data.order_status==1 || data.order_status==2 || data.order_status==3 || data.order_status==4}}">
+				<view class="sqsh">
+					<navigator url="../../ware/apply/apply?order_id={{data.id}}&goods_id={{item.goods_id}}"><text>申请售后</text></navigator>
+				</view>
+			</block>
+		</view>
+		<!-- <view class="list">
+			<view class="list_main">
+				<image src="../../../images/tishi.png"></image>
+				<view class="text">
+					<view class="title">它包含了界内知名的相关设计类素材网站站学习网站，干货下载等多版块，更快速的</view>
+					<text>颜色分类：红色</text><text>尺码：36</text>
+					<view>￥125.3<text>x1</text></view>
+				</view>
+			</view>
+		</view> -->
+	</view>
+	<!-- </van-sticky> -->
+	<!-- 价钱 -->
+	<view class="price">
+		<view><text>订单金额</text><text>￥{{data.shop_price}}</text></view>
+		<view><text>运费</text><text>￥{{data.shipping_monery}}</text></view>
+		<!-- <view><text>积分</text><text>-￥125.3</text></view> -->
+		<view class="totalPrice">
+			实付款：<text>￥{{data.price_sum}}</text>
+		</view>
+	</view>
+	<!-- 订单信息 -->
+	<view class="orderList">
+		<view><text>订单备注</text>{{data.remarks}}</view>
+		<view><text>订单编号</text>{{data.order_sn_id}}<text class="copy" bindtap="copyFun">复制</text></view>
+		<view><text>下单时间</text>{{data.create_time}}</view>
+	</view>
+	<!-- 操作 -->
+	<view class="doSome">
+		<!-- <van-button>评价晒单</van-button>
+		<van-button>联系客服</van-button>
+		<van-button bind:click="confirm">确认收货</van-button>
+		<van-button bind:click="cancelFun">取消订单</van-button>
+		<van-button bind:click="deleteFun">删除订单</van-button
+		<van-button bind:click="showPopup">去付款</van-button> -->
+
+		<!-- 待付款 -->
+		<block wx:if="{{data.order_status==0}}">
+			<van-button>联系客服</van-button>
+			<van-button bind:click="cancelFun">取消订单</van-button>
+			<van-button bind:click="showPopup" class="btn">去付款</van-button>
+		</block>
+		<!-- 已取消 -->
+		<block wx:if="{{data.order_status==-1}}">
+			<van-button>联系客服</van-button>
+			<van-button bind:click="deleteFun">删除订单</van-button>
+		</block>
+		<!-- 待发货 -->
+		<block wx:if="{{data.order_status==1}}">
+			<van-button>联系客服</van-button>
+		</block>
+		<block wx:if="{{data.order_status==2}}">
+			<van-button>联系客服</van-button>
+		</block>
+		<!-- 待收货 -->
+		<block wx:if="{{data.order_status==3}}">
+			<van-button>联系客服</van-button>
+			<van-button bind:click="go_logistics">查看物流</van-button>
+			<van-button bind:click="confirm" class="btn">确认收货</van-button>
+		</block>
+		<!-- 交易完成 -->
+		<block wx:if="{{data.order_status==4 && data.comment_status==0}}">
+			<van-button>联系客服</van-button>
+			<van-button bind:click="go_logistics">查看物流</van-button>
+			<van-button class="btn" bind:click="go_comment">评价晒单</van-button>
+		</block>
+		<block wx:if="{{data.order_status==4 && data.comment_status==1}}">
+			<van-button>联系客服</van-button>
+			<van-button bind:click="go_logistics">查看物流</van-button>
+			<van-button class="btn">追加评价</van-button>
+		</block>
+
+	</view>
+	<!-- 下拉弹框 -->
+	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+		<view class="popupTitle">确认付款</view>
+		<view class="choosePay" bindtap="choosePay">
+			<view>
+				<image src="../../../images/xianjinquan.png"></image>积分
+			</view>
+			<view>
+				<image wx:if="{{isUse}}" src="../../../images/weixuanze.png"></image>
+				<image wx:else="{{isUse}}" src="../../../images/xuanze.png"></image>
+			</view>
+		</view>
+		<view class="goPay">现金支付￥{{money}}</view>
+	</van-popup>
+	<!-- 弹框 -->
+	<!-- 确定收货 -->
+	<view class="gray" wx:if="{{qdss}}" bindtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{qdss}}" bindtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" bindtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/tishi.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认收货订单？</text>
+		<view class="yesNo">
+			<text class="no" bindtap="closeGray">再想想</text>
+			<text class="yes" bindtap="onYes">确认</text>
+		</view>
+	</view>
+	<!-- 取消订单 -->
+	<view class="gray" wx:if="{{qxdd}}" bindtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{qxdd}}" bindtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" bindtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/tishi.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认取消订单？</text>
+		<view class="yesNo">
+			<text class="no" bindtap="closeGray">再想想</text>
+			<text class="yes" bindtap="onYes">确认</text>
+		</view>
+	</view>
+	<!-- 删除订单 -->
+	<view class="gray" wx:if="{{scdd}}" bindtap="closeGray" catchtouchmove="preventTouchMove"></view>
+	<view class="alertBox" wx:if="{{scdd}}" bindtap="closeGray">
+		<view class="closeAlert">
+			<image src="../../../images/guanbi.png" bindtap="closeGray"></image>
+		</view>
+		<view class="alertTi">
+			<image src="../../../images/gantanhao.png"></image>
+			<text>温馨提示</text>
+		</view>
+		<text>是否确认删除订单？</text>
+		<view class="yesNo">
+			<text class="no" bindtap="closeGray">取消</text>
+			<text class="yes" bindtap="onYes">确认</text>
+		</view>
+	</view>
+
+
+	<!-- 弹窗 -->
+	<!-- <van-overlay show="{{ grayShow }}" bind:click="onClose2">
+		<view class="wrapper">
+			<view class="alertBox">
+				<view class="closeAlert">
+					<image src="../../../images/guanbi.png"></image>
+				</view>
+				<view class="alertTi">
+					<image src="../../../images/tishi.png"></image>
+					<text>温馨提示</text>
+				</view>
+				<text>是否确认收货订单？</text>
+				<view class="yesNo">
+					<text class="no">再想想</text>
+					<text class="yes" bindtap="onYes">确认</text>
+				</view>
+			</view>
+		</view>
+	</van-overlay> -->
+	<!-- <van-overlay show="{{ grayShow }}" bind:click="onClose2" /> -->
+</view>

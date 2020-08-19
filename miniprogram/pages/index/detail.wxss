@@ -1,0 +1,152 @@
+view{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.main{
+  position: relative;
+}
+.gray{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+}
+.slide{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 75vh;
+  border-radius:20rpx 20rpx 0px 0px;
+  background-color: #fff;
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+  /* transform: translateY(100%); */
+}
+.slide .shop{
+  display: flex;
+  margin-bottom: 50rpx;
+}
+.slide .shop image{
+  width:210rpx;
+  height:210rpx;
+  border-radius:10rpx;
+  margin-right: 30rpx;
+}
+.slide .shopinfo {
+  padding-top: 30rpx;
+}
+.slide .shopinfo view:first-child{
+  color: #FF653C;
+  font-size: 30rpx;
+}
+.slide .shopinfo view:nth-child(2){
+  color: #A2A2A2;
+  font-size:24rpx;
+  margin-top: 18rpx;
+  margin-bottom: 12rpx;
+}
+.slide .shopinfo text{
+  color: #333333;
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+.norms{
+  max-height: 356rpx;
+  overflow-y: scroll;
+}
+.norms .normsTit{
+  color: #333333;
+  font-size: 28rpx;
+  margin-bottom: 28rpx;
+}
+.norms .normsList:last-child text{
+  /* margin-bottom: 0; */
+}
+.normsList text{
+  display: inline-block;
+  height:54rpx;
+  line-height: 54rpx;
+  background:rgba(246,246,246,1);
+  border:1px solid rgba(246,246,246,1);
+  border-radius:27rpx;
+  padding: 0 26rpx;
+  font-size:26rpx;
+  color: #333;
+  margin-right: 28rpx;
+  margin-bottom: 28rpx;
+}
+.normsList text.active{
+  background:rgba(255,101,60,0.05);
+  border:1px solid #FF653C;
+  color: #FF653C;
+}
+
+.num {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 180rpx;
+  width: calc(100% - 40rpx);
+  box-sizing: border-box;
+}
+.num view:first-child{
+  font-size: 28rpx;
+  color: #333;
+}
+.num view:first-child text{
+  font-size: 22rpx;
+  color: #A2A2A2;
+}
+.num .cut{
+  /* font-size: 60rpx; */
+}
+.num .plus{
+  /* font-size: 60rpx; */
+}
+.num .numN{
+  display: inline-block;
+  height:48rpx;
+  line-height: 48rpx;
+  background:rgba(246,246,246,1);
+  border-radius:10rpx;
+  padding: 0 40rpx;
+  vertical-align: middle;
+  margin: 0 20rpx;
+  font-size:28rpx;
+  color: #333;
+}
+
+.goShop{
+  height:80rpx;
+  line-height: 80rpx;
+  width: 90%;
+  text-align: center;
+  background:rgba(255,101,60,1);
+  border-radius:40rpx;
+  font-size:28rpx;
+  color: #fff;
+  position: absolute;
+  bottom: 40rpx;
+  left: 5%;
+}
+.close{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.close image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+
+
+
+
+
+

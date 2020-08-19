@@ -1,0 +1,46 @@
+<view class="main">
+	<view class="gray" animation="{{fade}}"></view>
+	<!-- 弹出框 -->
+	<view class="slide">
+		<view class="shop">
+			<image src="{{goods_ok.pic_url}}"></image>
+			<view class="shopinfo">
+				<view>￥{{price_min}}-{{price_max}}</view>
+				<view>库存{{goods_ok.stock}}件</view>
+				<text>规格：{{arrName}}</text>
+			</view>
+		</view>
+		<!-- 规格 -->
+		<view class="norms">
+			<view wx:for="{{spec}}" wx:key="index">
+				<view class="normsTit">{{item.name}}</view>
+				<view class="normsList">
+					<text wx:for="{{item.spec_item}}" wx:for-index="chindex" bindtap="choose" class="{{item.isClick==1?'active':''}}" data-index="{{index}}" data-chindex="{{chindex}}" data-id="{{item.id}}" data-item="{{item.item}}">{{item.item}}</text>
+				</view>
+			</view>
+			<!-- class="{{currentItem==item.id?'active':''}}" -->
+			<!-- <view class="normsTit">尺码</view>
+      <view class="normsList">
+        <text>S</text>
+        <text>M</text>
+        <text>XL</text>
+      </view> -->
+		</view>
+		<!-- 购买数量 -->
+		<view class="num">
+			<view>购买数量
+				<!-- <text>（每人限购2件）</text> -->
+			</view>
+			<view>
+				<text class="cut">-</text>
+				<text class="numN">{{num}}</text>
+				<text class="plus">+</text>
+			</view>
+		</view>
+		<!-- 立即购买 -->
+		<view class="goShop" bindtap="goShop">立即购买</view>
+		<!-- 关闭 -->
+		<view class="close"><image src="../../images/weixuanze.png"></image></view>
+	</view>
+
+</view>

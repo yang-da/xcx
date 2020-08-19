@@ -1,0 +1,22 @@
+<!--pages/address/address.wxml-->
+<text bindtap="show">选择地址：{{address}}</text>
+
+
+<view class="picker" animation="{{animationData}}">
+  <view class="pickerChoose">
+    <text class="no" bindtap="hide">取消</text>
+    <text class="yes" bindtap="ok">确定</text>
+  </view>
+
+	<picker-view indicator-style="height:40px;" bindchange="bindChange" value="{{eindex}}">
+		<picker-view-column>
+			<view class="{{eindex[0]==index?'active':''}}" wx:for="{{prov}}" wx:key="{{index}}">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view class="{{eindex[1]==index?'active':''}}" wx:for="{{city}}" wx:key="{{index}}">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view class="{{eindex[2]==index?'active':''}}" wx:for="{{qu}}" wx:key="{{index}}">{{item.name}}</view>
+		</picker-view-column>
+	</picker-view>
+</view>

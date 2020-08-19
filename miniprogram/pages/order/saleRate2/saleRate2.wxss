@@ -1,0 +1,26 @@
+/* pages/order/saleRate2/saleRate2.wxss */
+@import "../saleRate/saleRate.wxss";
+
+.steps view::after{
+  content: '';
+  position: absolute;
+  width: 120rpx;
+  border-top: 2rpx dashed #a2a2a2;
+  top: 30%;
+  right: -90rpx;
+}
+.change{
+  width:250rpx;
+  height:60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border:1px solid rgba(255,101,60,1);
+  border-radius:30rpx;
+  font-size:24rpx;
+  color: #FF653C;
+  float: right;
+  margin-top: 30rpx;
+}
+.steps view.active:nth-child(3)::after{
+  border-top: 2rpx dashed #FF653C;
+}

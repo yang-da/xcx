@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "backgroundColor": "#F6F6F6",
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "物流详情",
+  "navigationBarTextStyle": "black"
+}

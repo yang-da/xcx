@@ -1,0 +1,64 @@
+<view class="container">
+	<block wx:if="{{hasData}}">
+		<!-- 滑动删除 -->
+		<van-swipe-cell right-width="{{ 65 }}" wx:for="{{carts}}" wx:key="index">
+			<van-cell-group>
+				<view class="list" wx:if="{{item.invalid==0}}">
+					<icon wx:if="{{item.selected}}" size="20" type="success" color="#FF653C" bindtap="changeSelect" data-index="{{index}}"></icon>
+					<icon wx:else type="circle" size="20" bindtap="changeSelect" data-index="{{index}}"></icon>
+					<image src="{{item.pic_url}}"></image>
+					<view class="shop">
+						<view>{{item.title}}</view>
+						<!-- <text>颜色分类：红色</text> -->
+						<text wx:for="{{item.item}}">{{item.spec}}：{{item.item}}</text>
+						<view class="handle">
+							<text class="price">￥{{item.price_member}}</text>
+							<view class="num">
+								<text bindtap="cut" data-index="{{index}}" data-id="{{item.id}}">-</text>
+								<text>{{item.goods_num}}</text>
+								<text bindtap="plus" data-index="{{index}}" data-id="{{item.id}}">+</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</van-cell-group>
+			<view slot="right" class="cell__right" bindtap="onClose" data-index="{{index}}" data-id="{{item.id}}">删除</view>
+			<view slot="right" class="cell__right star" bindtap="onStar" data-index="{{index}}" data-pid="{{item.p_id}}">收藏</view>
+		</van-swipe-cell>
+
+		<!-- 失效商品 -->
+		<view class="lose" wx:if="{{is_invalid}}">
+			<view class="loseHead">
+				<text>失效的商品</text>
+				<text>清空</text>
+			</view>
+			<view class="list" wx:for="{{carts}}" wx:key="index" wx:if="{{item.invalid==1}}">
+				<text class="shixiao">失效</text>
+				<image src="{{item.pic_url}}"></image>
+				<view class="shop">
+					<view>{{item.title}}</view>
+					<!-- <text>颜色分类：红色</text> -->
+					<!-- <text>尺码：36</text> -->
+					<view class="handle">
+						<text class="price">￥{{item.price_member}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+	</block>
+	<block wx:else>
+		<view style="margin-top:20rpx;font-size:30rpx;color:#333">您的购物车暂时没有商品</view>
+	</block>
+
+
+	<!-- 全选 -->
+	<view class="down">
+		<icon wx:if="{{allSelectd}}" size="22" type="success_circle" bindtap="changeAllSelect"></icon>
+		<icon wx:else type="circle" size="22" bindtap="changeAllSelect"></icon>
+		<text>全选</text>
+		<text class="settlement" bindtap="settleFun">结算</text>
+		<text class="allPrice">合计：<text>￥{{allPrice}}</text></text>
+	</view>
+
+</view>

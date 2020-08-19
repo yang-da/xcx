@@ -1,0 +1,32 @@
+<view class="container">
+	<view class="info">
+		<view class="h1">当前退货商品的收件人信息</view>
+		<view>张山峰<text>18650134430</text></view>
+		<view class="addtress">河北省石家庄市长安区天山大街与黄河大河大道交口澳怡大厦交口12层</view>
+	</view>
+
+	<view class="wlInfo">
+		<view class="h1">退货物流信息</view>
+		<!-- <view class="num">物流单号 <input value="{{number}}"></input></view>
+    <view class="company">
+      物流公司
+      <view>顺丰快递<van-icon name="arrow" /></view>
+    </view> -->
+		<view class="num">
+			<label>物流单号</label>
+			<input placeholder="请填写退货的物流单号" type="number" bindinput="bindInput"></input>
+		</view>
+		<view class="company" bindtap="jumpGs">
+			<label>物流公司</label>
+			<!-- <input placeholder="请选择物流公司" disabled="true"></input> -->
+			<picker mode="selector" range="{{arr}}" bindchange="bindchange">
+				<view class="picker">
+					{{arr[index]}}
+				</view>
+			</picker>
+			<van-icon name="arrow" color="#666666" />
+		</view>
+	</view>
+	<view class="p">请正确填写物流信息，以免影响您的退货进度</view>
+	<button class="submit {{input?'active':''}}">确认提交</button>
+</view>
