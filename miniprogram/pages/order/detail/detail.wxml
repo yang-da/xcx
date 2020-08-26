@@ -103,7 +103,7 @@
 		<block wx:if="{{data.order_status==0}}">
 			<van-button>联系客服</van-button>
 			<van-button bind:click="cancelFun">取消订单</van-button>
-			<van-button bind:click="showPopup" class="btn">去付款</van-button>
+			<van-button bind:click="showPopup" class="btn" data-id="{{item.id}}">去付款</van-button>
 		</block>
 		<!-- 已取消 -->
 		<block wx:if="{{data.order_status==-1}}">
@@ -148,7 +148,7 @@
 				<image wx:else="{{isUse}}" src="../../../images/xuanze.png"></image>
 			</view>
 		</view>
-		<view class="goPay">现金支付￥{{money}}</view>
+		<view class="goPay" bindtap="goPay">现金支付{{money}}</view>
 	</van-popup>
 	<!-- 弹框 -->
 	<!-- 确定收货 -->

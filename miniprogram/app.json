@@ -1,25 +1,27 @@
 {
   "pages": [
     "pages/order/myOrder/myOrder",
+    "pages/index/index",
+    "pages/address/mine",
+    
     "pages/order/sale/sale",
     "pages/order/wlxx/editWlxx",
-    "pages/order/wlxx/wlxx",
-
-    "pages/order/saleRate2/saleRate2",
     "pages/order/saleRate/saleRate",
     "pages/order/consult/consult",
-    "pages/address/mine",
-    "pages/index/index",
-    "pages/get/get",
-    "pages/cart/cart",
     "pages/order/detail/detail",
+    "pages/order/logistics/logistics",
+    "pages/problem/problem",
+    "pages/problem/answer",
 
+
+    "pages/index/detail",
     "pages/index/search",
     "pages/address/address",
-    "pages/index/detail",
-
-    "pages/order/logistics/logistics",
+    "pages/get/get",
+    "pages/cart/cart",
+    "pages/order/saleRate2/saleRate2",
     "pages/order/wlxx/choose",
+    "pages/order/wlxx/wlxx",
     "pages/order/wlxx/editWlxx2"
   ],
   "window": {
@@ -38,5 +40,25 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-icon": "@vant/weapp/icon/index"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#ff653c",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/down/shouye.png",
+      "selectedIconPath": "images/down/shouye1.png"
+    }, {
+      "pagePath": "pages/cart/cart",
+      "text": "购物车",
+      "iconPath": "images/down/gouwuche.png",
+      "selectedIconPath": "images/down/gouwuche1.png"
+    }, {
+      "pagePath": "pages/order/myOrder/myOrder",
+      "text": "我的",
+      "iconPath": "images/down/wode.png",
+      "selectedIconPath": "images/down/wode1.png"
+    }]
   }
 }

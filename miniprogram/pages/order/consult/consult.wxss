@@ -15,6 +15,21 @@ image{
   position: relative;
   margin-bottom: 20rpx;
 }
+.show::after{
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width:2rpx;
+  height:calc(100% + 30rpx);
+  background-color: #FF653C;
+  left: 18rpx;
+  /* transform: translateX(-50%); */
+  top: 50%;
+  z-index: 0;
+}
+.show:last-child::after{
+  display: none;
+}
 .show .yuan image{
   width: 36rpx;
   height: 36rpx;
@@ -28,7 +43,7 @@ image{
   z-index: 1;
   padding: 0;
 }
-.show .yuan::after {
+/* .show .yuan::after {
   content: '';
   display: inline-block;
   position: absolute;
@@ -39,7 +54,7 @@ image{
   transform: translateX(-50%);
   top: 48rpx;
   z-index: 0;
-}
+} */
 .show:last-child .yuan::after{
   display: none;
 }

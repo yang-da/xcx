@@ -1,16 +1,12 @@
-// pages/order/consult/consult.js
-const request = require('../../../utils/request');
-let userList = wx.getStorageSync('userList');
-let token = userList.token;
-
+// pages/problem/answer.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [],
-
+    item: '',
+    content: '',
   },
   escape2Html(str) { //转译方法
     var arrEntities = {
@@ -28,36 +24,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let return_id = options.return_id;
-    console.log(return_id)
-    request({
-      "Method": "Home.Order.getConsultationRecordLists",
-      "Timestamp": "2020-07-29 10:27:48",
-      "Version": "1.0",
-      "Body": {
-        "token": token,
-        "return_id": return_id //售后申请记录id
-      },
-      "Sign": "9527"
-    }).then(res => {
-      let {
-        list
-      } = res.data.data;
-      console.log(list);
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].header_pic == '') {
-          list[i].header_pic = 'http://ggb-service.ssup.cn/selfShop/img/zhenpinhui.png';
-        }
-        // list[i].content = this.escape2Html(list[i].content);
-        list[i].content = list[i].content.replace(/\n/g,'<br>')
-      }
-      console.log(list);
-      this.setData({
-        list: list
-      })
-
+    console.log(options)
+    let id = options.id;
+    this.setData({
+      item: options.item,
     })
-
+    wx.request({
+      url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance',
+      method: "post",
+      data: {
+        "Method": "Home.Pcenter.articleDetail",
+        "Timestamp": "2020-07-29 10:27:48",
+        "Version": "1.0",
+        "Body": {
+          "article_id": id
+        },
+        "Sign": "9527"
+      },
+      success: (res) => {
+        let {content} = res.data.data;
+        content = this.escape2Html(content);
+        this.setData({
+          content: content,
+        })
+      }
+    })
 
   },
 

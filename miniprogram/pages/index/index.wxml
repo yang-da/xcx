@@ -36,6 +36,8 @@
 			<navigator url="../cart/cart"><text>去购物车</text></navigator>
 			<navigator url="detail"><text>去选规格</text></navigator>
 			<navigator url="../address/address"><text>去选地址</text></navigator>
+			<navigator url="search"><text>去搜索页</text></navigator>
+			<navigator url="../order/myOrder/myOrder"><text>去订单页</text></navigator>
 		</view>
 		<view class="today">
 			<view class="todatTit">
@@ -79,7 +81,7 @@
 		</view>
 		<!-- 筛选 -->
 		<view class="screen">
-			<view class="tabs">
+			<view class="tabs" id="{{isFixed?'fixed':''}}">
 				<view class="{{tabIndex=='0'?'active':''}}" data-index="0" data-screen="default" bindtap="tabClick">默认</view>
 				<view class="{{tabIndex=='1'?'active':''}} {{second?'second':''}}" data-index="1" data-screen="sales_sum" bindtap="tabClick">
 					销量
@@ -101,7 +103,7 @@
 				</view>
 				<view class="{{tabIndex=='3'?'active':''}}" data-index="3" data-screen="create_time" bindtap="tabClick">最新</view>
 			</view>
-			<view class="tabs"></view>
+			<!-- <view class="tabs"></view> -->
 			<!-- 列表 -->
 			<view class="lists">
 				<view class="list" wx:for="{{shopList}}" wx:key="index" data-id="{{item.goods_id}}">

@@ -1,5 +1,7 @@
 // pages/order/wlxx/editWlxx.js
 const request = require('../../../utils/request');
+let userList = wx.getStorageSync('userList');
+let token = userList.token;
 
 Page({
 
@@ -12,7 +14,7 @@ Page({
     wlid: 0, //物流id
     address: '',
     waybill_number: '', //物流单号
-
+    express:'', //物流公司
   },
   jumpEdit() {
     // wx.navigateTo({
@@ -46,12 +48,19 @@ Page({
     })
   },
   submitFun() { //提交
+    if(this.data.waybill_number == ''){
+      wx.showToast({
+        title: '请填写物流单号',
+        icon: 'none'
+      })
+      return false;
+    }
     request({
       "Method": "Home.Order.setCourierNumber",
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+        "token": token, //用户token
         "return_id": this.data.return_id, //订单售后记录id
         "express_id": this.data.wlid, //快递公司id
         "waybill_number": this.data.waybill_number, //快递号
@@ -102,7 +111,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M" //用户token
+        "token": token //用户token
       },
       "Sign": "9527"
     }).then(res => {
@@ -129,7 +138,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M" //用户token
+        "token": token //用户token
       },
       "Sign": "9527"
     }).then(res => {

@@ -1,120 +1,157 @@
 /* pages/order/logistics/logistics.wxss */
-view,text{
+view,
+text {
   box-sizing: border-box;
 }
-image{
+
+image {
   vertical-align: middle;
 }
-.container{
+
+.container {
   padding: 20rpx;
   width: 100%;
 }
-.orderBox{
+
+.orderBox {
   width: 100%;
   background-color: #fff;
   padding: 20rpx;
   display: flex;
   justify-content: space-between;
-  border-radius:10rpx;
+  border-radius: 10rpx;
 }
-.orderBox view image{
+
+.orderBox view image {
   width: 130rpx;
   height: 130rpx;
   margin-right: 24rpx;
 }
-.order_r{
+
+.order_r {
   flex: 1;
 }
-.keywords{
+
+.keywords {
   font-size: 30rpx;
   color: #FF653C;
   font-weight: 500;
 }
-.order_r view:nth-child(2){
+
+.order_r view:nth-child(2) {
   color: #666666;
   font-size: 24rpx;
   margin-top: 18rpx;
 }
-.order_r view image{
+
+.order_r view image {
   width: 24rpx;
   height: 24rpx;
   margin-left: 24rpx;
   margin-bottom: 4rpx;
 }
-.order_r text{
+
+.order_r text {
   color: #666666;
   font-size: 24rpx;
 }
 
 /* 流程 */
-.flow{
+.flow {
   width: 100%;
   margin-top: 20rpx;
-  border-radius:10rpx;
+  border-radius: 10rpx;
   background-color: #fff;
   padding: 20rpx;
 }
-.flow>view{
+
+.flow>view {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 44rpx;
+  padding-bottom: 44rpx;
+  overflow: hidden;
+  position: relative;
 }
-.flow>view:last-child{
+
+.flow>view::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  height: calc(100% + 18rpx);
+  border-left: 2rpx dashed #E4E4E4;
+  left: 110rpx;
+  top: 28rpx;
+}
+.flow>view:last-child::after {
+  display: none;
+}
+
+.flow>view:last-child {
   margin-bottom: 10rpx;
 }
-.flow>view:last-child .circle::after{
+
+.flow>view:last-child .circle::after {
   height: 0;
 }
+
 .flowLeft {
   width: 110rpx;
   position: relative;
   margin-right: 30rpx;
 }
-.flowLeft view{
-  font-size:26rpx;
+
+.flowLeft view {
+  font-size: 26rpx;
   color: #999;
 }
-.flow view:first-child .flowLeft view{
+
+.flow view:first-child .flowLeft view {
   color: #333;
 }
-.flowLeft view text{
-  font-size:22rpx;
+
+.flowLeft view text {
+  font-size: 22rpx;
   color: #999;
   display: block;
   padding-left: 14rpx;
 }
-.circle{
+
+.circle {
   display: inline-block;
-  width:20rpx;
-  height:20rpx;
-  background:#e4e4e4;
-  border-radius:50%;
+  width: 20rpx;
+  height: 20rpx;
+  background: #e4e4e4;
+  border-radius: 50%;
   background-color: #e4e4e4;
   position: absolute;
   right: -10rpx;
   top: 10rpx;
 }
-.circle::after{
+
+/* .circle::after {
   content: '';
   position: absolute;
   display: inline-block;
   height: 120rpx;
   border-left: 2rpx dashed #E4E4E4;
   right: 10rpx;
-}
-.flowRight{
+} */
+
+.flowRight {
   flex: 1;
 }
-.flowRight text{
+
+.flowRight text {
   color: #333;
   font-size: 24rpx;
 }
-.flowRight .phone{
+
+.flowRight .phone {
   color: #FF653C;
 }
 
 
-.fixed{
+.fixed {
   position: fixed;
   top: 0;
 }

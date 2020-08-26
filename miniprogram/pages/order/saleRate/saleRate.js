@@ -1,5 +1,7 @@
 // pages/order/saleRate/saleRate.js
 const request = require('../../../utils/request');
+let userList = wx.getStorageSync('userList');
+let token = userList.token;
 
 Page({
 
@@ -9,12 +11,12 @@ Page({
   data: {
     active: 0,
     orderId: '',
-    address: '',
+    tip: ''
   },
   jumpChange(e) { //跳转到修改物流
     let status = e.target.dataset.status;
     wx.navigateTo({
-      url: '../wlxx/editWlxx?return_id=' + this.data.return_id + '&waybill_number='+this.data.waybill_number+'&express='+this.data.express+'&status='+status+'',
+      url: '../wlxx/editWlxx?return_id=' + this.data.return_id + '&waybill_number=' + this.data.waybill_number + '&express=' + this.data.express + '&status=' + status + '',
     })
   },
   jumpRecord() { //跳转到协商记录
@@ -35,6 +37,18 @@ Page({
       }
     })
   },
+  escape2Html(str) { //转译方法
+    var arrEntities = {
+      'lt': '<',
+      'gt': '>',
+      'nbsp': ' ',
+      'amp': '&',
+      'quot': '"'
+    };
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+      return arrEntities[t];
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -48,7 +62,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+        "token": token,
         "return_id": return_id //售后记录id
       },
       "Sign": "9527"
@@ -57,28 +71,30 @@ Page({
         data
       } = res.data;
       console.log(data);
+      let tip = this.escape2Html(data.tip);
       this.setData({
         data: data,
         orderId: data.order_sn_id,
         active: data.status,
+        tip: tip,
       })
     })
 
     // 获取售后地址
-    request({
-      "Method": "Home.Order.getAfterSaleInfo",
-      "Timestamp": "2020-07-29 10:27:48",
-      "Version": "1.0",
-      "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M" //用户token
-      },
-      "Sign": "9527"
-    }).then(res => {
-      let address = res.data.data.after_sale_info;
-      this.setData({
-        address: address
-      })
-    })
+    // request({
+    //   "Method": "Home.Order.getAfterSaleInfo",
+    //   "Timestamp": "2020-07-29 10:27:48",
+    //   "Version": "1.0",
+    //   "Body": {
+    //     "token": token
+    //   },
+    //   "Sign": "9527"
+    // }).then(res => {
+    //   let address = res.data.data.after_sale_info;
+    //   this.setData({
+    //     address: address
+    //   })
+    // })
   },
 
   /**

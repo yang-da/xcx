@@ -1,0 +1,10 @@
+<view class="contianer">
+	<view class="wen">
+		<image src="../../images/wen.png"></image>
+		<text>{{item}}</text>
+	</view>
+	<view class="da">
+		<image src="../../images/da.png"></image>
+		<rich-text nodes="{{content}}"></rich-text>
+	</view>
+</view>

@@ -1,26 +1,41 @@
 <view class="container">
 	<view class="orderBox">
 		<view>
-			<image src="../../../images/tishi.png"></image>
+			<image src="{{pic_url}}"></image>
 		</view>
 		<view class="order_r">
-			<view class="keywords">{{keywords}}</view>
-			<view class="">{{kd_type}}：{{orderId}}
+			<view class="keywords">
+				<block wx:if="{{State==0}}">无信息</block>
+				<block wx:if="{{State==2}}">派送中</block>
+				<block wx:if="{{State==3}}">已签收</block>
+				<block wx:if="{{State==4}}">快件有问题</block>
+			</view>
+			<view class="">{{name}}：{{waybill_number}}
 				<image src="../../../images/copy.png" bindtap="copyFun"></image>
 			</view>
-			<text>官方电话：95500</text>
+			<text>官方电话：{{tel}}</text>
 		</view>
 	</view>
 	<!-- 流程 -->
 	<view class="flow {{isFixed?'fixed':''}}">
-		<view>
+		<view wx:for="{{Traces}}">
+			<view class="flowLeft">
+				<view>{{item.date}} <text>{{item.time}}</text></view>
+				<text class="circle"></text>
+			</view>
+			<view class="flowRight">
+				<text>{{item.AcceptStation}}</text>
+				<!-- <text class="phone" bindtap="callPhone">{{phone}}</text> -->
+			</view>
+		</view>
+
+		<!-- <view>
 			<view class="flowLeft">
 				<view>06-13 <text>08:24</text></view>
 				<text class="circle"></text>
 			</view>
 			<view class="flowRight">
 				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
-				<text class="phone" bindtap="callPhone">{{phone}}</text>
 			</view>
 		</view>
 
@@ -32,17 +47,7 @@
 			<view class="flowRight">
 				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
 			</view>
-		</view>
-
-		<view>
-			<view class="flowLeft">
-				<view>06-13 <text>08:24</text></view>
-				<text class="circle"></text>
-			</view>
-			<view class="flowRight">
-				<text>派件交给张三丰，正在派件中，派件员刚刚电话：</text>
-			</view>
-		</view>
+		</view> -->
 
 
 

@@ -5,7 +5,7 @@
     <image src="../../../images/sanjiao_zuo.png" class="sanjiao"></image>
     <view>
       <view class="info">
-        <image src="http://ggb-service.ssup.cn/selfShop/img/zhenpinhui.png" mode="center"></image>
+        <image src="{{item.header_pic}}"></image>
         <view class="info_right">
           <view>{{item.name}}</view>
           <text>{{item.create_time}}</text>

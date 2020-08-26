@@ -76,7 +76,7 @@ Page({
     })
   },
 
-  percentFun(){
+  percentFun(){ //vant 组件
     this.setData({
       percent: 45
     })

@@ -1,60 +1,69 @@
-<view class="main">
-  <view bindtap="showSome">
-    <text>头像</text>
-    <image src="{{url}}"></image>
-  </view>
-  <view>
-    <text>昵称</text>
-    <view>张三 <image src="../../images/bianji.png"></image></view>
-  </view>
+<view class="mine">
+	<view class="head">
+		<image src="../../images/tishi.png"></image>
+		<view>
+			<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
+		</view>
+		<view>
+			<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权手机号</button>
+		</view>
+	</view>
+
+
+
+
+
 </view>
 
+<!-- --------------------------------- -->
+
+<view class="main">
+	<view bindtap="showSome">
+		<text>头像</text>
+		<image src="{{url}}"></image>
+	</view>
+	<view>
+		<text>昵称</text>
+		<view>张三 <image src="../../images/bianji.png"></image>
+		</view>
+	</view>
+</view>
 <view class="gray" animation="{{animationBgData}}" wx:if="{{flag}}"></view>
 <view class="slide" animation="{{animationData}}">
-  <view bindtap="photograph">拍照上传</view>
-  <view bindtap="album">相册选取</view>
-  <view bindtap="hideSome">取消</view>
+	<view bindtap="photograph">拍照上传</view>
+	<view bindtap="album">相册选取</view>
+	<view bindtap="hideSome">取消</view>
 </view>
-
-<!-- <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" max-count="6" bind:after-read="afterRead" bind:delete="delete" /> -->
 
 <view class="container">
-  <view class="shopInfo">
-    <image src="{{goods.pic_url}}"></image>
-    <view class="shopInfo_right">
-      <view class="title">{{goods.title}}</view>
-      <block wx:for="{{goods.attr}}"><text>{{item.name}}:</text><text>{{item.item}}</text> </block>
-      <view class="price">￥{{goods.goods_price}} <text>x{{goods.goods_num}}</text></view>
-    </view>
-  </view>
+	<view class="shopInfo">
+		<image src="{{goods.pic_url}}"></image>
+		<view class="shopInfo_right">
+			<view class="title">{{goods.title}}</view>
+			<block wx:for="{{goods.attr}}"><text>{{item.name}}:</text><text>{{item.item}}</text> </block>
+			<view class="price">￥{{goods.goods_price}} <text>x{{goods.goods_num}}</text></view>
+		</view>
+	</view>
 
-  <view class="num">
-    <view>退款数量 <text>x3</text></view>
-    <view>退款金额 <text>￥125.3</text></view>
-  </view>
+	<view class="num">
+		<view>退款数量 <text>x3</text></view>
+		<view>退款金额 <text>￥125.3</text></view>
+	</view>
 
-  <view class="status">
-    <view class="s1">货物状态 
-    <!-- <text>请选择 ></text> -->
-    <picker range="{{reason}}" mode="selector">
-      <view class="picker">请选择 ></view>
-    </picker>
-    </view>
-    <view class="s1">退款原因 
-      <picker range="{{reason}}" mode="selector" bindchange="bindchange">
-      <view class="picker">{{reason[index]}}</view>
-    </picker>
-    </view>
-    <textarea placeholder="请详细描述您的问题，以便尽快为您处理" maxlength="200" bindinput="bindinput"></textarea>
-    <view class="length">{{length}}/200</view>
-    <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" max-count="3" bind:after-read="afterRead" bind:delete="delete" />
-  </view>
-
-  
-
+	<view class="status">
+		<view class="s1">货物状态
+			<!-- <text>请选择 ></text> -->
+			<picker range="{{reason}}" mode="selector">
+				<view class="picker">请选择 ></view>
+			</picker>
+		</view>
+		<view class="s1">退款原因
+			<picker range="{{reason}}" mode="selector" bindchange="bindchange">
+				<view class="picker">{{reason[index]}}</view>
+			</picker>
+		</view>
+		<textarea placeholder="请详细描述您的问题，以便尽快为您处理" maxlength="200" bindinput="bindinput"></textarea>
+		<view class="length">{{length}}/200</view>
+		<van-uploader file-list="{{ fileList }}" deletable="{{ true }}" max-count="3" bind:after-read="afterRead" bind:delete="delete" />
+	</view>
 </view>
-
-
-
-
-

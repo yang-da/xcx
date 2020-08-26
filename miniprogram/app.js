@@ -1,7 +1,8 @@
 //app.js
 App({
   data: {
-    url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance'
+    // url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance',
+    url: 'https://xingsu.gangubang.cn/index.php/Home/Api/entrance'
   },
   onLaunch: function () {
 
@@ -24,7 +25,6 @@ App({
     wx.login({
       success: (res) => {
         if (res.code) {
-          console.log(res.code)
           wx.request({
             url: this.data.url,
             method: 'post',
@@ -39,8 +39,8 @@ App({
             },
             success: (res) => {
               wx.setStorage({
-                key: "token",
-                data: res.data.data.token
+                key: "userList",
+                data: res.data.data
               })
               // wx.getStorage({
               //   key: 'token',

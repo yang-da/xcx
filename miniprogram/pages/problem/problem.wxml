@@ -1,0 +1,13 @@
+<view class="container">
+	<view class="list" wx:for="{{list}}" wx:key="index">
+		<view class="left" bindtap="showDown" data-index="{{index}}">
+			<image src="{{item.pic_url}}"></image>
+			<view>{{item.name}}</view>
+			<van-icon wx:if="{{item.select!=true}}" name="arrow-down" />
+			<van-icon wx:else name="arrow-up" />
+		</view>
+		<view class="right {{item.select?'show':''}}">
+			<view wx:for="{{item.article_list}}" wx:key="index2" data-id="{{item.id}}" data-item="{{item.name}}" bindtap="showDetail">{{item.name}}</view>
+		</view>
+	</view>
+</view>

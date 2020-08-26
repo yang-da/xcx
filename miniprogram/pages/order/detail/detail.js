@@ -1,6 +1,8 @@
 // pages/order/detail/detail.js
 // import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const request = require("../../../utils/request");
+let userList = wx.getStorageSync('userList');
+let token = userList.token;
 
 Page({
 
@@ -15,7 +17,7 @@ Page({
     order_id: '', //订单ID 弹窗时赋值
     discriminate: -1, //区分确认收货、取消订单、删除订单
     isUse: false, //是否用券
-    money: '199',
+    money: '',
 
     data: {}, //返回的详细信息数据
     order_sn_id: '', //订单号
@@ -26,7 +28,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+        "token": token,
         "order_id": this.data.order_id //订单id
       },
       "Sign": "9527"
@@ -67,8 +69,10 @@ Page({
     return false;
   },
   // 下拉框方法
-  showPopup() {
+  showPopup(e) {
+    let id = e.currentTarget.dataset.id;
     this.setData({
+      order_id: id,
       show: true
     });
   },
@@ -125,7 +129,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -141,7 +145,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -157,7 +161,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -181,8 +185,37 @@ Page({
       isUse: !this.data.isUse
     })
   },
+  goPay() { //去支付
+    let id = this.data.order_id;
+    request({
+      "Method": "Home.WxJsPay.getWxPayInfo",
+      "Timestamp": "2020-07-29 10:27:48",
+      "Version": "1.0",
+      "Body": {
+        "token": token, //用户token
+        "order_id": id
+      },
+      "Sign": "9527"
+
+    }).then(res => {
+      let {
+        data
+      } = res.data;
+      console.log(data);
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr': data.nonceStr,
+        'package': data.package,
+        'signType': data.signType,
+        'paySign': data.paySign,
+        'success': function (res) {
+
+        },
+      })
+    })
+  },
   onPageScroll: function (e) { //页面滚动事件
-    if (e.scrollTop > 125) {
+    if (e.scrollTop > 20) {
       wx.setNavigationBarTitle({
         title: '订单详情'
       })
@@ -195,12 +228,12 @@ Page({
   // --------------------
   go_comment() { //去评价页
     wx.navigateTo({
-      url: '../../ware/comment/comment?order_id' + this.data.order_id,
+      url: '../../ware/comment/comment?order_id=' + this.data.order_id,
     })
   },
   go_logistics() { //去查看物流
     wx.navigateTo({
-      url: '../logistics/logistics?order_id' + this.data.order_id,
+      url: '../logistics/logistics?id=' + this.data.order_id,
     })
   },
   //去追评页

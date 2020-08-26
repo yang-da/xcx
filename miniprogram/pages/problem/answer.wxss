@@ -1,0 +1,35 @@
+.contianer{
+  padding: 0 24rpx;
+}
+.wen{
+  border-bottom: 1px solid #E4E4E4;
+}
+.contianer image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.wen {
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+.wen text{
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #333;
+}
+.da {
+  padding-top: 10rpx;
+  display: flex;
+}
+.da rich-text{
+  flex: 1;
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  margin-top: 10rpx;
+}
+
+

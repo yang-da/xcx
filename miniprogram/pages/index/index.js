@@ -21,7 +21,7 @@ Page({
     sort_field: "default", //筛选
     page: 1, //页数
     // tabsTop: 0, //tab 距离顶部距离
-    // isFixed: false //是否固定定位
+    isFixed: false, //是否固定定位
     twoShopList: [], //二级商品分类列表
     vantTabIndex: 0, //一级分类索引
     classId: 0, // 默认分类id
@@ -300,22 +300,23 @@ Page({
 
 
     // 获取元素对于顶部的距离
-    // wx.createSelectorQuery().select('.tabs').boundingClientRect(res => {
-    //   this.setData({
-    //     tabsTop: res.top
-    //   })
-    // }).exec()
+    wx.createSelectorQuery().select('.tabs').boundingClientRect(res => {
+      this.setData({
+        tabsTop: res.top
+      })
+    }).exec()
   },
   //向上卷曲 判断是否吸顶
-  // onPageScroll: function (e) {
-  //   var isSatisfy = e.scrollTop >= this.data.tabsTop ? true : false;
-  //   if (this.data.isFixedTop === isSatisfy) {
-  //     return false;
-  //   }
-  //   this.setData({
-  //     isFixed: isSatisfy
-  //   });
-  // },
+  onPageScroll: function (e) {
+    var isSatisfy = e.scrollTop >= this.data.tabsTop ? true : false;
+    // console.log(isSatisfy)
+    if (this.data.isFixed === isSatisfy) {
+      return false;
+    }
+    this.setData({
+      isFixed: isSatisfy
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

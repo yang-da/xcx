@@ -1,4 +1,6 @@
 const request = require("../../../utils/request");
+let userList = wx.getStorageSync('userList');
+let token = userList.token;
 
 Page({
 

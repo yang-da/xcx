@@ -1,5 +1,8 @@
 {
   "usingComponents": {
     "van-uploader": "@vant/weapp/uploader/index"
-  }
+  },
+  "navigationBarBackgroundColor": "#ff653c",
+  "navigationBarTitleText": "我的",
+  "navigationBarTextStyle": "white"
 }

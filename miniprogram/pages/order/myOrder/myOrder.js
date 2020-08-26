@@ -1,4 +1,7 @@
 const request = require("../../../utils/request");
+let userList = wx.getStorageSync('userList');
+let token = userList.token;
+// token = "MDAwMDAwMDAwMIGCb3M";
 
 Page({
 
@@ -12,7 +15,7 @@ Page({
     qxdd: false, //取消订单
     scdd: false, //删除订单
     isUse: false, //是否使用积分
-    money: 18.88, //计算得出现金金额
+    money: '', //计算得出现金金额
     loadText: '暂无更多数据',
     loadText2: '暂无更多数据',
 
@@ -32,7 +35,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+        "token": token,
         "order_status": order_status, //订单状态：空为全部订单，-1：取消订单；0 未支付，1已支付，2，发货中，3已发货，4已收货，5退货审核中，6审核失败，7审核成功，8退款中，9退款成功, 
         "p": page //当前页数
       },
@@ -70,7 +73,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M",
+        "token": token,
         "p": page
       },
       "Sign": "9527"
@@ -129,8 +132,11 @@ Page({
     }
   },
   // 下拉框方法
-  showPopup() {
+  showPopup(e) {
+    let id = e.currentTarget.dataset.id;
+    console.log(id);
     this.setData({
+      order_id: id,
       show: true
     });
   },
@@ -189,7 +195,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -205,7 +211,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -221,7 +227,7 @@ Page({
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token": "MDAwMDAwMDAwMIGCb3M",
+          "token": token,
           "order_id": id //订单id
         },
         "Sign": "9527"
@@ -233,8 +239,17 @@ Page({
       })
     }
     this.setData({
-      page: 1
+      page: 1,
+      scdd: false,
+      qdss: false,
+      qxdd: false,
+      show: false,
     })
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    }
     this.getList();
   },
   buyAgain(e) { //再次购买
@@ -257,7 +272,7 @@ Page({
       "Timestamp": "2020-07-29 10:27:48",
       "Version": "1.0",
       "Body": {
-        "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+        "token": token,
         "goods": arr //商品信息组
       },
       "Sign": "9527"
@@ -281,6 +296,34 @@ Page({
       isUse: !this.data.isUse
     })
   },
+  goPay() { //去支付
+    let id = this.data.order_id;
+    request({
+      "Method": "Home.WxJsPay.getWxPayInfo",
+      "Timestamp": "2020-07-29 10:27:48",
+      "Version": "1.0",
+      "Body": {
+        "token": token, //用户token
+        "order_id": id
+      },
+      "Sign": "9527"
+
+    }).then(res => {
+      let {
+        data
+      } = res.data;
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr': data.nonceStr,
+        'package': data.package,
+        'signType': data.signType,
+        'paySign': data.paySign,
+        'success': function (res) {
+
+        },
+      })
+    })
+  },
   jumpDetail(e) { //跳转到订单详情
     let id = e.currentTarget.dataset.id;
     console.log(id)
@@ -296,7 +339,9 @@ Page({
     // 订单列表
     this.getList();
     // 待评价获取数据
-    this.assess();
+    setTimeout(res => {
+      this.assess();
+    }, 1000)
   },
 
   /**

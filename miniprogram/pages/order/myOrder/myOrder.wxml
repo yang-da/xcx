@@ -66,7 +66,7 @@
 					<!-- 待付款 -->
 					<block wx:if="{{item.order_status==0}}">
 						<van-button catchtap="cancelFun" data-id="{{item.id}}">取消订单</van-button>
-						<van-button catchtap="showPopup" class="btn">去付款</van-button>
+						<van-button catchtap="showPopup" class="btn" data-id="{{item.id}}">去付款</van-button>
 					</block>
 					<!-- 待发货 -->
 					<block wx:if="{{item.order_status==1}}">
@@ -78,14 +78,14 @@
 					<!-- 待收货 -->
 					<block wx:if="{{item.order_status==3}}">
 						<van-button catchtap="buyAgain" data-index="{{index}}">再次购买</van-button>
-						<navigator url="../logistics/logistics">
+						<navigator url="../logistics/logistics?id={{item.id}}">
 							<van-button>查看物流</van-button>
 						</navigator>
 						<van-button catchtap="confirm" class="btn" data-id="{{item.id}}">确认收货</van-button>
 					</block>
 					<!-- 待评价 -->
 					<block wx:if="{{item.order_status==4 && item.comment_status==0}}">
-						<navigator url="../logistics/logistics">
+						<navigator url="../logistics/logistics?id={{item.id}}">
 							<van-button>查看物流</van-button>
 						</navigator>
 						<navigator url="../../ware/comment/comment?order_id={{item.id}}">
@@ -94,7 +94,7 @@
 					</block>
 					<!-- 已评价 -->
 					<block wx:if="{{item.order_status==4 && item.comment_status==1}}">
-						<navigator url="../logistics/logistics">
+						<navigator url="../logistics/logistics?id={{item.id}}">
 							<van-button>查看物流</van-button>
 						</navigator>
 						<navigator url="">
@@ -116,7 +116,7 @@
 		<view class="order" wx:for="{{assessList}}" wx:key="index" data-id="{{item.id}}" catchtap="jumpDetail">
 			<view class="orderTop">
 				<view>
-					<image src="../../../images/daipingjia.png"></image>珍品会
+					<image src="http://center.ssup.cn/Uploads/goods/2020-07-22/5f17a6b80a085.png"></image>珍品会
 				</view>
 				<text>待评价</text>
 			</view>
@@ -134,7 +134,7 @@
 
 				<view class="news">共{{item.count}}件 合计：￥{{item.price_sum}}(含运费￥{{item.shipping_monery}})</view>
 				<view class="doSome">
-					<navigator url="../logistics/logistics">
+					<navigator url="../logistics/logistics?id={{item.id}}">
 						<van-button>查看物流</van-button>
 					</navigator>
 					<navigator url="../../ware/comment/comment?order_id={{item.id}}">
@@ -163,7 +163,7 @@
 				<image wx:else="{{isUse}}" src="../../../images/xuanze.png"></image>
 			</view>
 		</view>
-		<view class="goPay">现金支付￥{{money}}</view>
+		<view class="goPay" bindtap="goPay">现金支付{{money}}</view>
 	</van-popup>
 	<!-- 弹出框 -->
 	<!-- 确定收货 -->

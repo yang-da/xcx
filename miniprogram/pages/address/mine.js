@@ -13,6 +13,69 @@ Page({
     reason: [],
     length: 0, //字符串长度
   },
+  // --------------------------
+  getUserInfo(e) {
+    let encryptedData = e.detail.encryptedData;
+    let iv = e.detail.iv;
+    let session_key = wx.getStorageSync('userList').session_key;
+    let token = wx.getStorageSync('userList').token;
+    //解密获得用户信息
+    wx.request({
+      url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance',
+      method: 'post',
+      data: {
+        "Method": "Home.Register.getUserInfo",
+        "Timestamp": "2020-07-29 10:27:48",
+        "Version": "1.0",
+        "Body": {
+          "token": token, //用户token
+          "sessionKey": session_key, //用户sessionKey
+          "encryptedData": encryptedData, // 用户信息加密数据
+          "iv": iv // 加密算法的初始向量
+        },
+        "Sign": "9527"
+      },
+      success: (res) => {
+        let {
+          data
+        } = res.data;
+        console.log(res)
+      }
+    })
+
+
+  },
+  getPhoneNumber(e) {
+    let encryptedData = e.detail.encryptedData;
+    let iv = e.detail.iv;
+    let session_key = wx.getStorageSync('userList').session_key;
+    let token = wx.getStorageSync('userList').token;
+    // 解密获得手机号
+    wx.request({
+      url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance',
+      data: {
+        "Method": "Home.Register.getUserMobile",
+        "Timestamp": "2020-07-29 10:27:48",
+        "Version": "1.0",
+        "Body": {
+          "token": token, //用户token
+          "sessionKey": session_key, //用户sessionKey
+          "encryptedData": encryptedData, // 用户手机号加密数据
+          "iv": iv // 加密算法的初始向量
+        },
+        "Sign": "9527"
+      },
+      method: "post",
+      success: (res) => {
+        let {
+          mobile
+        } = res.data.data;
+        console.log(mobile)
+      },
+    })
+  },
+  // --------------------------
+
   showSome() {
     this.setData({
       flag: true
@@ -117,13 +180,13 @@ Page({
     })
   },
 
-  bindchange(e){ //picker选择
+  bindchange(e) { //picker选择
     let value = e.detail.value;
     this.setData({
       index: value
     })
   },
-  bindinput(e){
+  bindinput(e) {
     let value = e.detail.value;
     this.setData({
       length: value.length
@@ -135,21 +198,24 @@ Page({
    */
   onLoad: function (options) {
     wx.request({
-      method:'post',
+      method: 'post',
       url: 'http://mapi.lonshon.com/index.php/Home/Api/entrance',
-      data:{
+      data: {
         "Method": "Home.Order.applyRefund",
         "Timestamp": "2020-07-29 10:27:48",
         "Version": "1.0",
         "Body": {
-          "token":"MDAwMDAwMDAwMIGCb3M",//用户token
-          "order_id": "289",//订单id
-          "goods_id": "3895"//申请售后商品id
+          "token": "MDAwMDAwMDAwMIGCb3M", //用户token
+          "order_id": "289", //订单id
+          "goods_id": "3895" //申请售后商品id
         },
-        "Sign":"9527"
+        "Sign": "9527"
       },
-      success: res=>{
-        let {reason,goods} = res.data.data;
+      success: res => {
+        let {
+          reason,
+          goods
+        } = res.data.data;
         this.setData({
           goods: goods,
           reason: reason

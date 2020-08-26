@@ -192,9 +192,10 @@ form {
   position: relative;
 } */
 #fixed{
-  position: fixed;
+  /* position: fixed;
   top: 300rpx;
-  z-index: 2;
+  z-index: 2; */
+  background-color: yellow;
 }
 .screen .tabs view image{
   width: 14rpx;

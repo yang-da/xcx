@@ -252,9 +252,9 @@ Page({
     }
     console.log(arr)
     arr = JSON.stringify(arr);
-    wx.navigateTo({
-      url: '../index/index?param='+arr+'',
-    })
+    // wx.navigateTo({
+    //   url: '../index/index?param='+arr+'',
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -293,7 +293,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let userList = wx.getStorageSync('userList');
+    console.log(userList)
+    
   },
 
   /**

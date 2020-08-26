@@ -53,23 +53,27 @@
 			<view class="stepShow1">商家拒绝</view>
 			<view class="stepShow2">您发起的退款申请已被商家拒绝，请进行<button>人工介入</button></view>
 			<view class="stepShowIn">
-				<view><text></text>原因：您的货物已发货，无法退款</view>
+				<view>
+					<rich-text nodes='{{tip}}'></rich-text>
+				</view>
 			</view>
 		</block>
 		<block wx:if="{{active<2&&active!=1}}">
 			<view class="stepShow1">待商家审核</view>
 			<view class="stepShow2">您已成功发起退款申请，请耐心等待商家处理</view>
 			<view class="stepShowIn">
-				<view><text></text>提示：商家会在1小时内完成审核，逾期将自动通过</view>
+				<view>
+					<rich-text nodes='{{tip}}'></rich-text>
+				</view>
 			</view>
 		</block>
 		<block wx:if="{{active>=2&&active<4}}">
 			<view class="stepShow1">等待寄回商品</view>
 			<view class="stepShow2">请按以下信息寄回商品(请勿货到付款)</view>
 			<view class="stepShowIn">
-				<view><text></text>收件人：{{address.name}}</view>
-				<view><text></text>联系电话：{{address.mobile}}</view>
-				<view><text></text>退货地址：{{address.address}}</view>
+				<view>
+					<rich-text nodes='{{tip}}'></rich-text>
+				</view>
 			</view>
 			<view wx:if="{{active>=3}}" class="change" bindtap="jumpChange" data-status="{{active}}">修改退货物流单号</view>
 			<view wx:if="{{active<3}}" class="change" bindtap="jumpChange" data-status="{{active}}">填写退货物流单号</view>
@@ -78,15 +82,20 @@
 			<view class="stepShow1">商家审核通过</view>
 			<view class="stepShow2">商家已同意您的退款申请，退款处理中</view>
 			<view class="stepShowIn">
-				<view><text></text>请您耐心等待退款情况，如有其他问题请联系<button open-type="contact" bindcontact="handleContact">客服咨询</button></view>
+				<!-- <text></text> -->
+				<!-- <button open-type="contact" bindcontact="handleContact">客服咨询</button> -->
+				<view>
+					<rich-text nodes='{{tip}}'></rich-text>
+				</view>
 			</view>
 		</block>
 		<block wx:if="{{active==5}}">
 			<view class="stepShow1">已办理退款</view>
 			<view class="stepShow2">退款时间:{{data.refund_time}}</view>
 			<view class="stepShowIn">
-				<view><text></text>退款￥{{data.price}}将退回到您的账户中，请及时关注到账情况</view>
-				<view><text></text>若您的退款未到账，请及时联系<button open-type="contact" bindcontact="handleContact">客服咨询</button></view>
+				<view>
+					<rich-text nodes='{{tip}}'></rich-text>
+				</view>
 			</view>
 		</block>
 	</view>
